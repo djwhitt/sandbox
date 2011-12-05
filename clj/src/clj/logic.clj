@@ -32,13 +32,6 @@
    ((mother p child))))
 
 (comment
-  (run* [q]
-    (fresh [g]
-      (== '(e x e
-            e x e
-            x x e) g)
-      (colo g q)))
-
   (run* [r]
     (fresh [x y]
       (resto '(grape raisin pair) x)
