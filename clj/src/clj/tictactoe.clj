@@ -21,6 +21,25 @@
       (== w (b p2))
       (== w (b p3)))))
 
+(defn pieceo [x]
+  (conde
+   ((== x '_))
+   ((== x 'x))
+   ((== x 'o))))
+
+(defn boardo [b]
+  (fresh [a3 b3 c3 a2 b2 c2 a1 b1 c1]
+    (== b [a3 b3 c3 a2 b2 c2 a1 b1 c1])
+    (pieceo a3)
+    (pieceo b3)
+    (pieceo c3)
+    (pieceo a2)
+    (pieceo b2)
+    (pieceo c2)
+    (pieceo a1)
+    (pieceo b1)
+    (pieceo c1)))
+
 (comment
   (run* [q]
     (fresh [b w]
@@ -29,4 +48,13 @@
            [:c 1] :x, [:c 2] :x, [:c 3] :x} b)
       (rowo b w)
       (== w q)))
+
+  (run 12 [q]
+    (boardo q))
+
+  ;; generates: ([a 3] [b 3] [c 3] [a 2] ... )
+  (let [rows   (range 3 0 -1)
+        cols   ['a 'b 'c]
+        coords (for [x rows y cols] [y x])]
+    coords)
   )
