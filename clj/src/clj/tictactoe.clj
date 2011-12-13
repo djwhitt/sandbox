@@ -11,16 +11,6 @@
                 [[:c 1] [:c 2]]
                 [[:c 2] [:c 3]]])
 
-(defn rowo [b w]
-  (fresh [p1 p2 p3]
-    (left-of p1 p2)
-    (left-of p2 p3)
-    (project [b p1 p2 p3]
-      (!= w nil)
-      (== w (b p1))
-      (== w (b p2))
-      (== w (b p3)))))
-
 (defn pieceo [x]
   (conde
    ((== x '_))
@@ -40,6 +30,20 @@
     (pieceo b1)
     (pieceo c1)))
 
+(defn rowo [b w]
+  (fresh [p1 p2 p3]
+    (left-of p1 p2)
+    (left-of p2 p3)
+    (project [b p1 p2 p3]
+      (!= w nil)
+      (== w (b p1))
+      (== w (b p2))
+      (== w (b p3)))))
+
+
+
+
+
 (comment
   (run* [q]
     (fresh [b w]
@@ -57,4 +61,11 @@
         cols   ['a 'b 'c]
         coords (for [x rows y cols] [y x])]
     coords)
+
+  (run* [q]
+    (fresh [a]
+      (== a {:a 1 :b 2})
+      (== a {:a q :b 2}))
+    )
+
   )
