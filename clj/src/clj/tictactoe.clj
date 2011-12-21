@@ -32,9 +32,9 @@
 
 (defn pieceo [x]
   (conde
-   ((== x '_))
-   ((== x 'x))
-   ((== x 'o))))
+   ((== x :_))
+   ((== x :x))
+   ((== x :o))))
 
 (defmacro boardo [b]
   (let [ps ['p0 'p1 'p2 'p3 'p4 'p5 'p6 'p7 'p8]]
@@ -59,18 +59,20 @@
 (comment
   (run* [q]
     (fresh [b r]
-      (== [:x :e :e
+      (== [:x :_ :_
            :o :o :o
            :x :x :x] b)
       (rowo b r)
+      (boardo b)
       (== q r)))
 
   (run* [q]
     (fresh [b c]
-      (== [:x :e :e
+      (== [:x :_ :_
            :o :o :o
            :x :x :x] b)
       (colo b c)
+      (boardo b)
       (== q c)))
 
   (run 12 [q]
