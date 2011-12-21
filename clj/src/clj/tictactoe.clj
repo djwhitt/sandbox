@@ -30,17 +30,26 @@
               [4 7]
               [5 8]])
 
+(defn spaceo [x]
+  (== x :_))
+
 (defn pieceo [x]
   (conde
-   ((== x :_))
    ((== x :x))
    ((== x :o))))
+
+(def playero pieceo)
+
+(defn squareo [x]
+  (conde
+   ((spaceo x))
+   ((pieceo x))))
 
 (defmacro boardo [b]
   (let [ps ['p0 'p1 'p2 'p3 'p4 'p5 'p6 'p7 'p8]]
     `(fresh ~ps
        (== ~b ~ps)
-       ~@(map (fn [p] (list 'pieceo p)) ps))))
+       ~@(map (fn [p] (list 'squareo p)) ps))))
 
 (defn rowo [b r]
   (fresh [p1 p2 p3]
@@ -55,6 +64,18 @@
     (above p2 p3)
     (project [b p1 p2 p3]
       (== c [(b p1) (b p2) (b p3)]))))
+
+(defn moveo [b p]
+  (fresh [c x]
+    (coordinate p c)
+    (project [b p]
+      (== (b p) x)
+      (spaceo x))))
+
+;; minimax
+;;   input
+;;     board
+;;     player
 
 (comment
   (run* [q]
@@ -74,6 +95,17 @@
       (colo b c)
       (boardo b)
       (== q c)))
+
+  (run* [q]
+    (fresh [b p]
+      (== [:x :_ :_
+           :o :o :o
+           :x :x :x] b)
+      (moveo b p)
+      (== q p)))
+
+  (run* [q]
+    (squareo q))
 
   (run 12 [q]
     (boardo q))
