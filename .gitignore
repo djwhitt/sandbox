@@ -1,7 +1,7 @@
-pom.xml
-*jar
-lib/
-classes/
-.lein-failures
-.lein-deps-sum
-tmp/
+*.jar
+/clj/.lein-deps-sum
+/clj/.lein-failures
+/clj/classes/
+/clj/lib/
+/clj/pom.xml
+/ga/tmp/
