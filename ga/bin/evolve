@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+$:.unshift(File.dirname(__FILE__) + '/../lib')
+
+require 'algorithm'
+require 'individual'
+require 'match_strategy'
+
+strategy = MatchStrategy.new(Individual.new.generate.genes)
+
+population = Population.new(50, strategy, true)
+
+generation_count = 0
+while population.fittest.fitness < strategy.max_fitness
+  generation_count += 1
+  puts "Generation: #{generation_count} Fittest: #{population.fittest.fitness}"
+  population = Algorithm.evolve(population)
+end
+
+puts
+puts "Solution found!"
+puts "Generation: #{generation_count}"
+puts "Genes: #{population.fittest.genes.inspect}"
