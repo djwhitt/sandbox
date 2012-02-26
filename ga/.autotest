@@ -1,0 +1,13 @@
+# -*- ruby -*-
+
+require 'autotest/restart'
+require 'test_notifier/runner/autotest'
+
+Autotest.add_hook :initialize do |at|
+  at.testlib = 'helper'
+  at.add_mapping(/helper.rb/) do |f, _|
+    at.files_matching(/^test.*rb$/)
+  end
+end
+
+# vim: set filetype=ruby:
