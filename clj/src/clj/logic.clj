@@ -92,10 +92,13 @@
   (defn sublisto
     [x y]
     (fresh [a b c]
-      (appendo a b y)
+      (appendo a x y)
       (appendo x c b)))
 
   (run 5 [q]
     (sublisto q [1 2 3 4 5]))
+
+  (run 3 [q]
+    (sublisto [1 2] q))
   
   )
