@@ -3,33 +3,25 @@
   (:use [clojure.core.logic]))
 
 (defrel father Father Child)
+
 (defrel mother Mother Child)
 
-(facts father [['Vito 'Michael]
-               ['Vito 'Sonny]
-               ['Vito 'Fredo]
-               ['Michael 'Anthony]
-               ['Michael 'Mary]
-               ['Sonny 'Vicent]
-               ['Sonny 'Francesca]
-               ['Sonny 'Kathryn]
-               ['Sonny 'Frank]
-               ['Sonny 'Santino]])
+(facts father [['Sonny 'Vito]
+               ['Vito 'Michael]
+               ['Michael 'Mary]])
 
 (facts mother [['Carmela 'Michael]
-               ['Carmela 'Sonny]
-               ['Carmela 'Fredo]
-               ['Kay 'Mary]
-               ['Kay 'Anthony]
-               ['Sandra 'Francesca]
-               ['Sandra 'Kathryn]
-               ['Sandra 'Frank]
-               ['Sandra 'Santino]])
+               ['Kay 'Mary]])
 
-(defn parent [p child]
+(defn parent [p c]
   (conde
-   [(father p child)]
-   [(mother p child)]))
+   [(father p c)]
+   [(mother p c)]))
+
+(defn grandparent [gp gc]
+  (fresh [p]
+    (parent p gc)
+    (parent gp p)))
 
 (comment
   
