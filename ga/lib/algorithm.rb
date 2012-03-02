@@ -35,7 +35,7 @@ class Algorithm
   end
 
   def self.crossover(individual1, individual2)
-    new_individual = Individual.new(individual1.fitness_strategy, individual1.length)
+    new_individual = individual1.dup
     individual1.length.times do |i|
       if rand <= UNIFORM_RATE
         new_individual.genes[i] = individual1.genes[i]

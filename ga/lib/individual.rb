@@ -5,9 +5,9 @@ class Individual
 
   attr_accessor :genes, :length, :fitness_strategy
 
-  def initialize(fitness_strategy=NullStrategy.new, length=DEFAULT_GENE_LENGTH)
-    @fitness_strategy = fitness_strategy
-    @length = length
+  def initialize(opts={})
+    @fitness_strategy = opts.fetch(:fitness_strategy) { lambda {|_| nil} }
+    @length = opts.fetch(:length) { DEFAULT_GENE_LENGTH }
     @fitness = nil
     @genes = []
   end
@@ -30,5 +30,10 @@ class Individual
   def []=(i, gene)
     @fitness = nil
     @genes[i] = gene
+  end
+
+  def initialize_copy(source)
+    super
+    @genes = @genes.dup
   end
 end

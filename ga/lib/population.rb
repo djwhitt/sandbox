@@ -4,11 +4,11 @@ class Population
   attr_accessor :size, :individuals, :fitness_strategy
 
   def initialize(size, fitness_strategy, generate=true)
-    @size = size    
+    @size = size
     @individuals = []
     @fitness_strategy = fitness_strategy
     size.times do |i|
-      individual = Individual.new(fitness_strategy)
+      individual = Individual.new(:fitness_strategy => @fitness_strategy)
       individual.generate if generate
       @individuals[i] = individual
     end
