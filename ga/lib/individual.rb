@@ -1,4 +1,4 @@
-require 'null_strategy'
+require 'null_fitness_strategy'
 
 class Individual
   DEFAULT_GENE_LENGTH = 64
@@ -6,10 +6,14 @@ class Individual
   attr_accessor :genes, :length, :fitness_strategy
 
   def initialize(opts={})
-    @fitness_strategy = opts.fetch(:fitness_strategy) { lambda {|_| nil} }
+    @fitness_strategy = opts.fetch(:fitness_strategy) { NullFitnessStrategy.new }
     @length = opts.fetch(:length) { DEFAULT_GENE_LENGTH }
     @fitness = nil
     @genes = []
+  end
+
+  def self.generate(opts={})
+    self.new(opts).generate
   end
 
   def generate

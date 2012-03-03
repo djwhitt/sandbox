@@ -1,17 +1,24 @@
 require 'individual'
+require 'null_fitness_strategy'
 
 class Population
   attr_accessor :size, :individuals, :fitness_strategy
 
-  def initialize(size, fitness_strategy, generate=true)
-    @size = size
+  def initialize(opts={})
+    @size = opts.fetch(:size)
+    @fitness_strategy = opts.fetch(:fitness_strategy) { NullFitnessStrategy.new }
+    generate = opts.fetch(:generate) { false }
+    
     @individuals = []
-    @fitness_strategy = fitness_strategy
     size.times do |i|
       individual = Individual.new(:fitness_strategy => @fitness_strategy)
-      individual.generate if generate
+      individual.generate if generate      
       @individuals[i] = individual
     end
+  end
+
+  def self.generate(opts={})
+    self.new(opts.merge(:generate => true))
   end
 
   def fittest
