@@ -22,7 +22,7 @@ class Algorithm
     (offset...population.size).each do |i|
       individual1 = tournament_selection(population)
       individual2 = tournament_selection(population)
-      new_individual = crossover(individual1, individual2)
+      new_individual = individual1 + individual2
       new_population[i] = new_individual
     end
 

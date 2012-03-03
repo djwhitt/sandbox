@@ -4,10 +4,11 @@ class Individual
   
   DEFAULT_GENE_LENGTH = 64
 
-  attr_accessor :genes, :length, :fitness_strategy
+  attr_accessor :genes, :length, :fitness_strategy, :crossover_strategy
 
   def initialize(opts={})
     @fitness_strategy = opts[:fitness_strategy]
+    @crossover_strategy = opts[:crossover_strategy]
     @length = opts.fetch(:length) { DEFAULT_GENE_LENGTH }
     @fitness = nil
     @genes = []
@@ -49,4 +50,9 @@ class Individual
   def each(&block)
     @genes.each(&block)
   end
+
+  def crossover(other_individual)
+    @crossover_strategy.call(self, other_individual)
+  end
+  alias_method :+, :crossover
 end

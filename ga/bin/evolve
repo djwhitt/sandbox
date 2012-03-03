@@ -5,13 +5,16 @@ $:.unshift(File.dirname(__FILE__) + '/../lib')
 require 'algorithm'
 require 'individual'
 require 'match_strategy'
+require 'uniform_crossover'
 
-strategy = MatchStrategy.new(Individual.generate.genes)
+fitness_strategy = MatchStrategy.new(Individual.generate.genes)
 
-population = Population.generate(:size => 50, :fitness_strategy => strategy)
+population = Population.generate(:size => 50,
+                                 :fitness_strategy => fitness_strategy,
+                                 :crossover_strategy => UniformCrossover.new)
 
 generation_count = 0
-while population.fittest.fitness < strategy.max_fitness
+while population.fittest.fitness < fitness_strategy.max_fitness
   generation_count += 1
   puts "Generation: #{generation_count} Fittest: #{population.fittest.fitness}"
   population = Algorithm.evolve(population)
