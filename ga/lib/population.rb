@@ -1,15 +1,14 @@
 require 'individual'
-require 'null_fitness_strategy'
 
 class Population
-  attr_accessor :size, :individuals, :fitness_strategy
+  attr_accessor :individuals, :fitness_strategy
 
   def initialize(opts={})
-    @size = opts.fetch(:size)
-    @fitness_strategy = opts.fetch(:fitness_strategy) { NullFitnessStrategy.new }
+    size = opts.fetch(:size)
+    @fitness_strategy = opts[:fitness_strategy]
     generate = opts.fetch(:generate) { false }
     
-    @individuals = []
+    @individuals = Array.new(size)
     size.times do |i|
       individual = Individual.new(:fitness_strategy => @fitness_strategy)
       individual.generate if generate      
@@ -18,11 +17,12 @@ class Population
   end
 
   def self.generate(opts={})
-    self.new(opts.merge(:generate => true))
+    opts = opts.merge(:generate => true)
+    self.new(opts)
   end
 
   def fittest
-    @individuals.max_by {|i| i.fitness }
+    @individuals.max
   end
 
   def [](i)
@@ -30,7 +30,18 @@ class Population
   end
 
   def []=(i, individual)
-    @fitness = nil
     @individuals[i] = individual
+  end
+
+  def size
+    @individuals.size
+  end
+
+  def initialize_copy(source)
+    super
+    @individuals = @individuals.dup
+    @individuals.size.times do |i|
+      @individuals[i] = @individuals[i].dup
+    end
   end
 end

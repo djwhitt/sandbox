@@ -1,6 +1,5 @@
 require 'individual'
 require 'population'
-require 'null_object'
 
 class Algorithm
   UNIFORM_RATE = 0.5
@@ -9,7 +8,7 @@ class Algorithm
   ELITISM = true
 
   def self.evolve(population)
-    new_population = Population.new(population.size, population.fitness_strategy, false)
+    new_population = population.dup
 
     if ELITISM
       new_population[0] = population.fittest
@@ -20,14 +19,14 @@ class Algorithm
       offset = 1
     end
 
-    (offset..population.size).each do |i|
+    (offset...population.size).each do |i|
       individual1 = tournament_selection(population)
       individual2 = tournament_selection(population)
       new_individual = crossover(individual1, individual2)
       new_population[i] = new_individual
     end
 
-    (offset..new_population.size).each do |i|
+    (offset...new_population.size).each do |i|
       mutate(new_population[i])
     end
 
@@ -55,7 +54,7 @@ class Algorithm
   end
 
   def self.tournament_selection(population)
-    tournament = Population.new(TOURNAMENT_SIZE, NullObject.new, false)
+    tournament = Population.new(:size => TOURNAMENT_SIZE)
     TOURNAMENT_SIZE.times do |i|
       tournament[i] = population[rand(population.size)]
     end

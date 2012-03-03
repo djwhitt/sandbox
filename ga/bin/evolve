@@ -6,9 +6,9 @@ require 'algorithm'
 require 'individual'
 require 'match_strategy'
 
-strategy = MatchStrategy.new(Individual.new.generate.genes)
+strategy = MatchStrategy.new(Individual.generate.genes)
 
-population = Population.new(50, strategy, true)
+population = Population.generate(:size => 50, :fitness_strategy => strategy)
 
 generation_count = 0
 while population.fittest.fitness < strategy.max_fitness
