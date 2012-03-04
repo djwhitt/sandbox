@@ -2,7 +2,6 @@ require 'individual'
 require 'population'
 
 class Algorithm
-  UNIFORM_RATE = 0.5
   MUTATION_RATE = 0.015
   TOURNAMENT_SIZE = 5
   ELITISM = true
@@ -27,30 +26,10 @@ class Algorithm
     end
 
     (offset...new_population.size).each do |i|
-      mutate(new_population[i])
+      new_population[i].mutate
     end
 
     new_population
-  end
-
-  def self.crossover(individual1, individual2)
-    new_individual = individual1.dup
-    individual1.length.times do |i|
-      if rand <= UNIFORM_RATE
-        new_individual.genes[i] = individual1.genes[i]
-      else
-        new_individual.genes[i] = individual2.genes[i]
-      end
-    end
-    new_individual
-  end
-
-  def self.mutate(individual)
-    individual.length.times do |i|
-      if rand <= MUTATION_RATE
-        individual[i] = rand(2)
-      end
-    end
   end
 
   def self.tournament_selection(population)

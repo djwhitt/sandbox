@@ -1,5 +1,7 @@
 class UniformCrossover
   DEFAULT_RATE = 0.5
+
+  attr_accessor :rate
   
   def initialize(opts={})
     @rate = opts.fetch(:rate) { DEFAULT_RATE }

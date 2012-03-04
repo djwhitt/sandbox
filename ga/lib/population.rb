@@ -1,18 +1,20 @@
 require 'individual'
 
 class Population
-  attr_accessor :individuals, :fitness_strategy, :crossover_strategy
+  attr_accessor :individuals, :fitness_strategy, :crossover_strategy, :mutation_strategy
 
   def initialize(opts={})
     size = opts.fetch(:size)
     @fitness_strategy = opts[:fitness_strategy]
     @crossover_strategy = opts[:crossover_strategy]
+    @mutation_strategy = opts[:mutation_strategy]
     generate = opts.fetch(:generate) { false }
     
     @individuals = Array.new(size)
     size.times do |i|
       individual = Individual.new(:fitness_strategy => @fitness_strategy,
-                                  :crossover_strategy => @crossover_strategy)
+                                  :crossover_strategy => @crossover_strategy,
+                                  :mutation_strategy => @mutation_strategy)
       individual.generate if generate      
       @individuals[i] = individual
     end

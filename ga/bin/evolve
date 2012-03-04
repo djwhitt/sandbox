@@ -6,12 +6,14 @@ require 'algorithm'
 require 'individual'
 require 'match_strategy'
 require 'uniform_crossover'
+require 'bit_flip_mutation'
 
 fitness_strategy = MatchStrategy.new(Individual.generate.genes)
 
 population = Population.generate(:size => 50,
                                  :fitness_strategy => fitness_strategy,
-                                 :crossover_strategy => UniformCrossover.new)
+                                 :crossover_strategy => UniformCrossover.new,
+                                 :mutation_strategy => BitFlipMutation.new)
 
 generation_count = 0
 while population.fittest.fitness < fitness_strategy.max_fitness
