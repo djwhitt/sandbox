@@ -1,5 +1,3 @@
-require 'helper'
-
 require 'population'
 
 class TestIndividual < MiniTest::Unit::TestCase

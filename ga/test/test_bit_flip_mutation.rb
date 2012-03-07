@@ -1,5 +1,3 @@
-require 'helper'
-
 require 'individual'
 require 'bit_flip_mutation'
 

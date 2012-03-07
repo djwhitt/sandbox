@@ -1,5 +1,3 @@
-require 'helper'
-
 require 'individual'
 require 'uniform_crossover'
 

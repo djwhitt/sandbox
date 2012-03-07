@@ -1,5 +1,3 @@
-require 'helper'
-
 require 'individual'
 
 class TestIndividual < MiniTest::Unit::TestCase

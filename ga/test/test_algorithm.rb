@@ -1,5 +1,3 @@
-require 'helper'
-
 require 'algorithm'
 require 'individual'
 
