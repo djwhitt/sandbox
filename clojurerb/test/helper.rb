@@ -4,4 +4,6 @@ gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/mock'
 
+require 'clojurerb'
+
 $:.unshift File.dirname(__FILE__) + '/../lib'

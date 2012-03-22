@@ -1,2 +1,1 @@
-module ClojureRB
-end
+require 'clojurerb/reader'
