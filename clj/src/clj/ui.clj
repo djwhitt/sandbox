@@ -3,9 +3,15 @@
 
 (comment
 
-  (-> (frame :title "Hello" :content "Hi there")
+  (def f (frame :title "Hello" :content "Hi there"))
+
+  (-> f
       pack!
       show!)
+
+  (def fp (flow-panel :align :left
+                      :hgap 20
+                      :items ["Label" "Another label"]))
 
   (-> (frame :title "Hello"
              :content (vertical-panel :items ["This" "is" "a" "vertical"
