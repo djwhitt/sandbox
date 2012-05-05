@@ -1,5 +1,12 @@
 (ns sandbox.ui
-  (:use [seesaw core dev]))
+  (:require [fs.core :as fs])
+  (:use [seesaw core dev]
+        [clj-ns-browser.sdoc]))
+
+(defn read-config []
+  (-> (str (System/getenv "HOME") "/.recordsrc")
+      slurp
+      read-string))
 
 (comment
 

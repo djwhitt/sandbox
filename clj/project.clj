@@ -4,4 +4,6 @@
                  [org.clojure/core.logic "0.6.7"]
                  [clj-redis "0.0.13-SNAPSHOT"]
                  [incanter "1.3.0-SNAPSHOT"]
-                 [seesaw "1.4.0"]])
+                 [seesaw "1.4.0"]
+                 [fs "1.1.2"]]
+  :dev-dependencies [[clj-ns-browser "1.2.0"]])
