@@ -1,0 +1,4 @@
+- Break mutation and crossover out into strategy classes
+- Write real number representation
+- Write real number example to match string of real numbers
+- Rename "Individual" to "Genome"
