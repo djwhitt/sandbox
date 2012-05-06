@@ -1,4 +1,4 @@
-(ns sandbox.ui
+(ns sandbox.records
   (:require [fs.core :as fs]
             [clojure.string :as s])
   (:use [seesaw core dev]
@@ -50,5 +50,5 @@
                   (action :handler choose :name "...")])))
       pack!
       show!)
-  
+
   )
