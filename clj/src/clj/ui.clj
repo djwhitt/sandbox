@@ -1,24 +1,8 @@
-(ns sandbox.records
+(ns sandbox.ui
   (:require [fs.core :as fs]
             [clojure.string :as s])
   (:use [seesaw core dev]
         [clj-ns-browser.sdoc]))
-
-(defn read-config []
-  (-> (str (System/getenv "HOME") "/.recordsrc")
-      slurp
-      read-string))
-
-(defn parse-file-name [f]
-  (let [bn                (fs/base-name f)
-        [n ext]           (fs/split-ext f)
-        [date-str & tags] (s/split n #"-")
-        tags              (set tags)
-        [year month day]  (s/split date-str #"\.")]
-    {:name n
-     :extension ext
-     :date {:year year, :month month, :day day}
-     :tags tags}))
 
 (comment
 
