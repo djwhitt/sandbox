@@ -1,3 +1,0 @@
-gem 'minitest'
-gem 'parslet'
-gem 'perftools.rb'
